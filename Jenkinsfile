@@ -18,7 +18,23 @@ pipeline {
           			echo 'maven build is done'
             }
         }
-       
+        stage('docker image'){
+            steps{
+				echo "Build no is ${BUILD_ID}"
+				echo "Build no is ${BUILD_NUMBER}"
+                bat 'docker build -t 9894851315/devopsimage -f Dockerfile .'
+                echo 'docker image is created'
+            }
+        }
+        stage('docker deploy'){
+            steps{
+                bat 'docker container rm -f devopscontainer'
+                bat 'docker run --name devopscontainer -itd -p 9595:9595 9894851315/devopsimage'
+                echo 'docker container is created'
+                echo 'docker container is running'
+            }
+        }
+        
         
     }
  }
