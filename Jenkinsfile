@@ -29,7 +29,7 @@ pipeline {
         stage('docker deploy'){
             steps{
                 bat 'docker container rm -f devopscontainer'
-                bat 'docker run --name devopscontainer -itd -p 9595:9595 9894851315/devopsimage'
+                bat 'docker run --name devopscontainer -itd -p 9999:9595 9894851315/devopsimage'
                 echo 'docker container is created'
                 echo 'docker container is running'
             }
